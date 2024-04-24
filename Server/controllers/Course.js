@@ -29,7 +29,7 @@ exports.createCourse = async (req, res) => {
       });
     }
 
-    //check for instructer
+    // !check for instructer (something fishy)
     const userId = req.user.id;
     const instructorDetails = await User.findById({ userId });
     console.log("Instructer Details: ", instructorDetails);
@@ -94,19 +94,32 @@ exports.createCourse = async (req, res) => {
   }
 };
 
-
-
 //getAllCourse handler function
-exports.getAllCourses = async (req,res) => {
-    try {
+exports.showAllCourses = async (req, res) => {
+  try {
+    const allCourses = await Course.find(
+      {},
+      {
+        courseName: true,
+        price: true,
+        thumbnail: true,
+        instructor: true,
+        ratingAndReview: true,
+      }
+    )
+      .populate("instructor")
+      .exec();
 
-        
-    } catch (error) {
-        console.log(error);
-        return res.status(500).json({
-            success: false,
-            mesage: "something went wrong, please try again",
-        });
-        
-    }
-}
+    return res.status(200).josn({
+      success: true,
+      message: "Datafor all courses fetched successfully",
+      data: allCourses,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      success: false,
+      mesage: "something went wrong, please try again",
+    });
+  }
+};
