@@ -11,7 +11,7 @@ exports.createSubsection = async (req, res) => {
     const video = req.files.videoFile;
     // validation
     if (!sectionId || !title || !timeDuration || !description) {
-      return res.status(403).json({
+      return res.status(404).json({
         success: false,
         message: "please fill all deatils carefully",
       });
@@ -37,7 +37,7 @@ exports.createSubsection = async (req, res) => {
         },
       },
       { new: true }
-    );
+    ).populate("subSection");
     // ! hw populate the deatils
     // return res
     return res.status(200).json({

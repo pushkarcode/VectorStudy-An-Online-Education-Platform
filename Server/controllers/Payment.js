@@ -1,0 +1,1 @@
+const {instance} = require('../config/razorpay')

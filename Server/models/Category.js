@@ -5,8 +5,7 @@ const categorySchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-    trim: true,
-  },
+n  },
   description: {
     type: String,
     required: true,
@@ -19,5 +18,5 @@ const categorySchema = new mongoose.Schema({
 });
 
 
-module.exports = mongoose.model("Tag", categorySchema);
+module.exports = mongoose.model("Category", categorySchema);
 

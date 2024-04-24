@@ -13,7 +13,7 @@ const OTPSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now,
-    expires: 5 * 60,
+    expires:60 * 5,
   },
 });
 // ! Something cokking golu (mail send)

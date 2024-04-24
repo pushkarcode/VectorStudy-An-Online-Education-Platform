@@ -1,11 +1,11 @@
 const Profile = require("../models/Profile");
 const User = require("../models/User");
 
+// ! update profile
 exports.updateProfile = async (req, res) => {
-  m;
   try {
     // get data
-    const { dateOfBirth = "", about = "", contactNumber, gender } = req.body;
+    const { dateOfBirth = "", about = "", contactNumber } = req.body;
     // get userId
     const id = req.user.id;
     // vaildation
@@ -22,7 +22,6 @@ exports.updateProfile = async (req, res) => {
     // update profile
     profileDetails.dateOfBirth = dateOfBirth;
     profileDetails.about = about;
-    profileDetails.gender = gender;
     profileDetails.contactNumber = contactNumber;
     await profileDetails.save();
     //    return res

@@ -25,8 +25,13 @@ exports.createsection = async (req, res) => {
       },
       { new: true }
     )
-      .populate("courseDetails")
-      .exec();
+    .populate({
+      path: "courseContent",
+      populate: {
+        path: "subSection",
+      },
+    })
+    .exec();
     //! HW use populate to replace section/sub-section both in update course
     // return
 
@@ -83,10 +88,9 @@ exports.deleteSection = async (req, res) => {
     // use findByIdandDelete
     await Section.findByIdAndDelete(sectionId);
     // TODO[TESTING]: Do we need to delete the entry from course schema
-    // return res
     return res.status(200).json({
-      success: true,
-      message: "section deleted succesfully",
+            success: true,
+            message: "section deleted succesfully",
     });
   } catch (error) {
     return res.status(500).json({

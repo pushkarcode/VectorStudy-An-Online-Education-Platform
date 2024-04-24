@@ -2,14 +2,24 @@ const User = require("../models/User");
 const Tag = require("../models/Tag");
 const Course = require("../models/Course");
 const uploadImageToCloudinary = require("../utils/imageUploader");
+const Category = require("../models/Category");
 
 // createCourse handler function
 
 exports.createCourse = async (req, res) => {
   try {
     // fetch data
-    const { courseNmae, courseDescription, whatYouWillLearn, price, tag } =
-      req.body;
+    const {
+      courseNmae,
+      courseDescription,
+      whatYouWillLearn,
+      price,
+      tag,
+      category,
+      instructions,
+			status,
+    } = req.body;
+    const userId = req.user.id;
 
     //get thumbnail
     const thumbnail = req.files.thumbnailImage;
@@ -21,7 +31,8 @@ exports.createCourse = async (req, res) => {
       !whatYouWillLearn ||
       !price ||
       !thumbnail ||
-      !tag
+      !tag ||
+      !category
     ) {
       return res.status(400).json({
         success: false,
@@ -30,7 +41,6 @@ exports.createCourse = async (req, res) => {
     }
 
     // !check for instructer (something fishy)
-    const userId = req.user.id;
     const instructorDetails = await User.findById({ userId });
     console.log("Instructer Details: ", instructorDetails);
 
@@ -42,8 +52,8 @@ exports.createCourse = async (req, res) => {
     }
 
     //check given tag is vaild or not
-    const tagDetilas = await Tag.findById(tag);
-    if (!tagDetilas) {
+    const categoryDetilas = await Category.findById(category);
+    if (!categoryDetilas) {
       return rs.staus(200).json({
         success: false,
         mesage: "tag deatils not found",
@@ -61,10 +71,13 @@ exports.createCourse = async (req, res) => {
       courseName,
       courseDescription,
       instructor: instructorDetails._id,
-      whatYouWillLearn,
+      whatYouWillLearn: whatYouWillLearn,
       price,
-      tag: tagDetilas._id,
+      tag: tag,
+      category: categoryDetilas._id,
       thumbnail: thumbnailImage.secure_url,
+      status: status,
+			instructions: instructions,
     });
 
     // add the new course to the user schema of instructer
@@ -87,10 +100,12 @@ exports.createCourse = async (req, res) => {
       data: newCourse,
     });
   } catch (error) {
-    return res.status(500).json({
-      success: false,
-      mesage: "something went wrong, please try again",
-    });
+    console.error(error);
+		res.status(500).json({
+			success: false,
+			message: "Failed to create course",
+			error: error.message,
+		});
   }
 };
 
@@ -105,6 +120,7 @@ exports.showAllCourses = async (req, res) => {
         thumbnail: true,
         instructor: true,
         ratingAndReview: true,
+				studentsEnroled: true,
       }
     )
       .populate("instructor")

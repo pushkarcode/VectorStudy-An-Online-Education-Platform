@@ -15,15 +15,15 @@ exports.resetPasswordToken = async (req, res) => {
       });
     }
     //Genrate token
-    const token = crypto.randomUUID();
+    const token = crypto.randomBytes(20).toString("hex");
     // update user by adding token and expriration time
     const updateDetails = await User.findOneAndUpdate(
       { email: email },
-      { token: token, resetPasswordExpires: Date.now() + 5 * 60 * 1000 },
+      { token: token, resetPasswordExpires: Date.now() + 3600000 },
       { new: true }
     );
     // create url
-    const url = `http://localhost:3000/update-password /${token}`;
+    const url = `http://localhost:3000/update-password/${token}`;
     // send mail containg the url
     await mailSender(
       email,
@@ -51,14 +51,14 @@ exports.resetPassword = async (req, res) => {
     //data fetch
     const { password, confirmPassword, token } = req.body;
     //vaidation
-    if (!password || !confirmPassword) {
+    if (password !== confirmPassword) {
       return res.status(200).jaon({
         success: false,
         message: "password and confirm password not match",
       });
     }
     // get userdetails from db using token
-    const userDetails = await user.findOne({ token: token });
+    const userDetails = await User.findOne({ token: token });
     // if no entry - invalid token
     if (!userDetails) {
       return res.status(400).json({
@@ -67,7 +67,7 @@ exports.resetPassword = async (req, res) => {
       });
     }
     // token time check
-    if (userDetails.resetPasswordExpires < Date.now()) {
+    if (!(userDetails.resetPasswordExpires > Date.now())) {
       return res.jaon({
         success: true,
         message: "token has expired Golu.",
