@@ -1,6 +1,6 @@
 const Category = require("../models/Category");
 
-// create a new tag handler function
+// create a new catgory handler function
 exports.createCategory = async (req, res) => {
   try {
     //get the tag data
@@ -34,10 +34,13 @@ exports.createCategory = async (req, res) => {
   }
 };
 
-//getALl tags handler function
+//getALl category handler function
 exports.showAllCategorys = async (req, res) => {
   try {
-    const allCategory = await Category.find({}, { name: true, description: true });
+    const allCategory = await Category.find(
+      {},
+      { name: true, description: true }
+    );
     res.status(200).json({
       success: true,
       message: "All Tages return successful",
@@ -53,60 +56,59 @@ exports.showAllCategorys = async (req, res) => {
 };
 
 // ! category page details
-
 exports.categoryPageDetails = async (req, res) => {
-	try {
-		const { categoryId } = req.body;
+  try {
+    const { categoryId } = req.body;
 
-		// Get courses for the specified category
-		const selectedCategory = await Category.findById(categoryId)
-			.populate("courses")
-			.exec();
-		console.log(selectedCategory);
-		// Handle the case when the category is not found
-		if (!selectedCategory) {
-			console.log("Category not found.");
-			return res
-				.status(404)
-				.json({ success: false, message: "Category not found" });
-		}
-		// Handle the case when there are no courses
-		if (selectedCategory.courses.length === 0) {
-			console.log("No courses found for the selected category.");
-			return res.status(404).json({
-				success: false,
-				message: "No courses found for the selected category.",
-			});
-		}
+    // Get courses for the specified category
+    const selectedCategory = await Category.findById(categoryId)
+      .populate("courses")
+      .exec();
+    console.log(selectedCategory);
+    // Handle the case when the category is not found
+    if (!selectedCategory) {
+      console.log("Category not found.");
+      return res
+        .status(404)
+        .json({ success: false, message: "Category not found" });
+    }
+    // Handle the case when there are no courses
+    if (selectedCategory.courses.length === 0) {
+      console.log("No courses found for the selected category.");
+      return res.status(404).json({
+        success: false,
+        message: "No courses found for the selected category.",
+      });
+    }
 
-		const selectedCourses = selectedCategory.courses;
+    const selectedCourses = selectedCategory.courses;
 
-		// Get courses for other categories
-		const categoriesExceptSelected = await Category.find({
-			_id: { $ne: categoryId },
-		}).populate("courses");
-		let differentCourses = [];
-		for (const category of categoriesExceptSelected) {
-			differentCourses.push(...category.courses);
-		}
+    // Get courses for other categories
+    const categoriesExceptSelected = await Category.find({
+      _id: { $ne: categoryId },
+    }).populate("courses").exec();
+    let differentCourses = [];
+    for (const category of categoriesExceptSelected) {
+      differentCourses.push(...category.courses);
+    }
 
-		// Get top-selling courses across all categories
-		const allCategories = await Category.find().populate("courses");
-		const allCourses = allCategories.flatMap((category) => category.courses);
-		const mostSellingCourses = allCourses
-			.sort((a, b) => b.sold - a.sold)
-			.slice(0, 10);
+    // Get top-selling courses across all categories
+    const allCategories = await Category.find().populate("courses");
+    const allCourses = allCategories.flatMap((category) => category.courses);
+    const mostSellingCourses = allCourses
+      .sort((a, b) => b.sold - a.sold)
+      .slice(0, 10);
 
-		res.status(200).json({
-			selectedCourses: selectedCourses,
-			differentCourses: differentCourses,
-			mostSellingCourses: mostSellingCourses,
-		});
-	} catch (error) {
-		return res.status(500).json({
-			success: false,
-			message: "Internal server error",
-			error: error.message,
-		});
-	}
+    res.status(200).json({
+      selectedCourses: selectedCourses,
+      differentCourses: differentCourses,
+      mostSellingCourses: mostSellingCourses,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+      error: error.message,
+    });
+  }
 };

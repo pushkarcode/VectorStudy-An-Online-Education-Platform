@@ -10,14 +10,14 @@ exports.createCourse = async (req, res) => {
   try {
     // fetch data
     const {
-      courseNmae,
+      courseName,
       courseDescription,
       whatYouWillLearn,
       price,
       tag,
       category,
       instructions,
-			status,
+      status,
     } = req.body;
     const userId = req.user.id;
 
@@ -26,7 +26,7 @@ exports.createCourse = async (req, res) => {
 
     //validation
     if (
-      !courseNmae ||
+      !courseName ||
       !courseDescription ||
       !whatYouWillLearn ||
       !price ||
@@ -77,7 +77,7 @@ exports.createCourse = async (req, res) => {
       category: categoryDetilas._id,
       thumbnail: thumbnailImage.secure_url,
       status: status,
-			instructions: instructions,
+      instructions: instructions,
     });
 
     // add the new course to the user schema of instructer
@@ -101,11 +101,11 @@ exports.createCourse = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-		res.status(500).json({
-			success: false,
-			message: "Failed to create course",
-			error: error.message,
-		});
+    res.status(500).json({
+      success: false,
+      message: "Failed to create course",
+      error: error.message,
+    });
   }
 };
 
@@ -120,7 +120,7 @@ exports.showAllCourses = async (req, res) => {
         thumbnail: true,
         instructor: true,
         ratingAndReview: true,
-				studentsEnroled: true,
+        studentsEnroled: true,
       }
     )
       .populate("instructor")
@@ -141,4 +141,47 @@ exports.showAllCourses = async (req, res) => {
 };
 
 // getCourse details
+exports.getAllCourseDetails = async (req, res) => {
+  try {
+    // data fetch
+    const { courseId } = req.body;
+    // find course details
+    const courseDetails = await Course.find({ _id: courseId })
+      .populate({
+        path: "instructer",
+        populate: {
+          path: "additionalDetails",
+        },
+      })
+      .populate("category")
+      .populate("ratingAndreviews")
+      .populate({
+        path: "courseContent",
+        populate: {
+          path: "subSection",
+        },
+      })
+      .exec();
 
+    // vaidation
+    if (!courseDetails) {
+      return res.status(400).json({
+        success: false,
+        meddage: `Could not find the course with ${courseId}`,
+      });
+    }
+
+    // return res
+    return res.status(200).json({
+      success: true,
+      message: "course details fetched successfully",
+      data: courseDetails,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      success: false,
+      message: "something went wrong, please try again",
+    });
+  }
+};
