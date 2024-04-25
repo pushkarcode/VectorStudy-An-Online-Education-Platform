@@ -139,3 +139,6 @@ exports.showAllCourses = async (req, res) => {
     });
   }
 };
+
+// getCourse details
+
