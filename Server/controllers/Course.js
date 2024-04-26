@@ -39,6 +39,9 @@ exports.createCourse = async (req, res) => {
         mesage: "please fill all deatils carefully",
       });
     }
+    if (!status || status === undefined) {
+			status = "Draft";
+		}
 
     // !check for instructer (something fishy)
     const instructorDetails = await User.findById({ userId });
@@ -148,7 +151,7 @@ exports.getAllCourseDetails = async (req, res) => {
     // find course details
     const courseDetails = await Course.find({ _id: courseId })
       .populate({
-        path: "instructer",
+        path: "instructor",
         populate: {
           path: "additionalDetails",
         },
