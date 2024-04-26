@@ -12,8 +12,8 @@ const courseSchema = new mongoose.Schema({
     trim: true,
   },
   instructor: {
-    type: mongoose.Schema.Types.OnjectId,
-    ref: "user",
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
     required: true,
   },
   whatYouWillLearn: {
@@ -41,7 +41,7 @@ const courseSchema = new mongoose.Schema({
     required: true,
   },
   tag: {
-    type: [string],
+    type: [String],
     required: true,
   },
   category: {
@@ -56,7 +56,7 @@ const courseSchema = new mongoose.Schema({
     },
   ],
   instruction: {
-    type: [string],
+    type: [String],
   },
   status: {
     type: String,
@@ -64,4 +64,4 @@ const courseSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.modal("Course", courseSchema);
+module.exports = mongoose.model("Course", courseSchema);

@@ -1,5 +1,4 @@
 const User = require("../models/User");
-const Tag = require("../models/Tag");
 const Course = require("../models/Course");
 const uploadImageToCloudinary = require("../utils/imageUploader");
 const Category = require("../models/Category");
