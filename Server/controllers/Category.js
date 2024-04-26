@@ -56,7 +56,7 @@ exports.showAllCategorys = async (req, res) => {
 };
 
 // ! category page details
-exports.categoryPageDetails = async (req, res) => {
+exports.getcategoryPageDetails = async (req, res) => {
   try {
     const { categoryId } = req.body;
 
