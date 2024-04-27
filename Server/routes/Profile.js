@@ -20,6 +20,7 @@ router.put("/updateProfile", auth, updateProfile);
 router.get("/getUserDetails", auth, getAllUserDetails);
 // get enrolled
 router.get("/getEnrolledCourses", auth, getEnrolledCourses);
-router.put("/updateDisplayPicture", auth, updateDisplayPicture);
+router.put("/updateDisplayPicture", auth, updateDisplayPicture)
+
 
 module.exports = router;

@@ -1,6 +1,7 @@
 const Profile = require("../models/Profile");
 const User = require("../models/User");
 const { uploadImageToCloudinary } = require("../utils/imageUploader");
+require("dotenv").config();
 
 // ! update profile
 exports.updateProfile = async (req, res) => {
@@ -103,11 +104,11 @@ exports.updateDisplayPicture = async (req, res) => {
     const userId = req.user.id
     const image = await uploadImageToCloudinary(
       displayPicture,
-      process.env.FOLDER_NAME,
+      "vectorcode",
       1000,
       1000
     )
-    console.log("data is here"+ image)
+    console.log(image)
     const updatedProfile = await User.findByIdAndUpdate(
       { _id: userId },
       { image: image.secure_url },
@@ -121,10 +122,11 @@ exports.updateDisplayPicture = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       success: false,
-      message:"error in update image"+ error.message,
+      message: error.message,
     })
   }
 };
+
 
 //! getenrooled courses
 exports.getEnrolledCourses = async (req, res) => {

@@ -1,4 +1,5 @@
-const cloudinary = require("cloudinary").v2; //! make sure import correctly
+const cloudinary = require('cloudinary').v2;
+require("dotenv").config();
 
 exports.cloudinaryConnect = () => {
   try {
@@ -8,6 +9,6 @@ exports.cloudinaryConnect = () => {
       api_secret: process.env.API_SECRET,
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
-};
+}; 

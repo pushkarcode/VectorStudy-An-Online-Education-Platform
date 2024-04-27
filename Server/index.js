@@ -3,9 +3,10 @@ const express = require("express");
 const db = require("./config/database");
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
-const cloudinary = require("./config/cloudinary");
-const fileUpload = require('express-fileupload');
+const fileUpload = require("express-fileupload");
 require("dotenv").config();
+const cloudinary = require("./config/cloudinary");
+
 
 
 const app = express();
@@ -24,12 +25,10 @@ app.use(
     credentials: true,
   })
 );
-app.use(
-  fileUpload({
-    useTempfiles: true,
-    tempFileDir: "/tmp/",
-  })
-)
+app.use(fileUpload({
+  useTempFiles : true,
+  tempFileDir : '/tmp/'
+}));
 
 //connect with cloude
 cloudinary.cloudinaryConnect();

@@ -6,10 +6,9 @@ const jwt = require("jsonwebtoken");
 const mailSender = require("../utils/mailSender");
 const Profile = require("../models/Profile");
 require("dotenv").config();
-const uuid = require('uuid');
+const uuid = require("uuid");
 // Generate a unique token
 const token = uuid.v4();
-
 
 // ? sign up
 exports.signUp = async (req, res) => {
@@ -60,8 +59,10 @@ exports.signUp = async (req, res) => {
     }
 
     // ! find most recent otp in db
-    const recentOtp = await OTP.find({ email }).sort({ createdAt: -1 }).limit(1);
-      // recent otp
+    const recentOtp = await OTP.find({ email })
+      .sort({ createdAt: -1 })
+      .limit(1);
+    // recent otp
     console.log(recentOtp);
 
     //Validate otp
@@ -81,9 +82,9 @@ exports.signUp = async (req, res) => {
     // Hash Password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-   // Create the user
-		let approved = "";
-		approved === "Instructor" ? (approved = false) : (approved = true);
+    // Create the user
+    let approved = "";
+    approved === "Instructor" ? (approved = false) : (approved = true);
 
     //entry created in DB
     const profileDetails = await Profile.create({
@@ -100,9 +101,9 @@ exports.signUp = async (req, res) => {
       contactNumber,
       password: hashedPassword,
       accountType: accountType,
-			approved: approved,
+      approved: approved,
       additionalDetails: profileDetails._id,
-      image: `https://api.dicebear.com/5.x/initials/svg?seed=${firstName} ${lastName}`,
+      image: `https://api.dicebear.com/5.x/initials/svg?seed=${firstName}${lastName}`,
       token: token,
     });
 
