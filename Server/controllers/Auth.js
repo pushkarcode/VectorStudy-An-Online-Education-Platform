@@ -6,6 +6,10 @@ const jwt = require("jsonwebtoken");
 const mailSender = require("../utils/mailSender");
 const Profile = require("../models/Profile");
 require("dotenv").config();
+const uuid = require('uuid');
+// Generate a unique token
+const token = uuid.v4();
+
 
 // ? sign up
 exports.signUp = async (req, res) => {
@@ -56,9 +60,8 @@ exports.signUp = async (req, res) => {
     }
 
     // ! find most recent otp in db
-    const recentOtp = await OTP.find({ email })
-      .sort({ createdAt: -1 })
-      .limit(1); // recent otp
+    const recentOtp = await OTP.find({ email }).sort({ createdAt: -1 }).limit(1);
+      // recent otp
     console.log(recentOtp);
 
     //Validate otp
@@ -78,11 +81,15 @@ exports.signUp = async (req, res) => {
     // Hash Password
     const hashedPassword = await bcrypt.hash(password, 10);
 
+   // Create the user
+		let approved = "";
+		approved === "Instructor" ? (approved = false) : (approved = true);
+
     //entry created in DB
     const profileDetails = await Profile.create({
       gender: null,
       dateOfBirth: null,
-      avout: null,
+      about: null,
       contactNumber: null,
     });
 
@@ -90,19 +97,21 @@ exports.signUp = async (req, res) => {
       firstName,
       lastName,
       email,
-      password: hashedPassword,
-      accountType,
       contactNumber,
-      additionalDetails: profileDetails,
+      password: hashedPassword,
+      accountType: accountType,
+			approved: approved,
+      additionalDetails: profileDetails._id,
       image: `https://api.dicebear.com/5.x/initials/svg?seed=${firstName} ${lastName}`,
+      token: token,
     });
 
     //return res
 
     return res.status(200).json({
       success: true,
-      message: "User created successfully",
       user,
+      message: "User created successfully",
     });
   } catch (error) {
     console.log(error);
@@ -112,8 +121,8 @@ exports.signUp = async (req, res) => {
     });
   }
 };
-// * login
 
+// * login
 exports.login = async (req, res) => {
   try {
     //get data from req.body
@@ -171,18 +180,11 @@ exports.login = async (req, res) => {
   }
 };
 
-// !signup otp
+// !Send otp to email
 exports.sendOTP = async (req, res) => {
   try {
     // fetch email from req ki body
     const { email } = req.body;
-
-    if (!email) {
-      return res.status(400).json({
-        success: false,
-        mesage: "please fill all deatils carefully",
-      });
-    }
 
     //check if user already exist
     const checkUserPresent = await User.findOne({ email });
@@ -213,7 +215,6 @@ exports.sendOTP = async (req, res) => {
       otp = otpGenerator.generate(6, {
         upperCaseAlphabets: false,
       });
-      result = await OTP.findOne({ otp: otp });
     }
 
     const otppayload = { email, otp };

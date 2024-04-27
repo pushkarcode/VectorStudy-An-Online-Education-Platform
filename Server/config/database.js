@@ -5,7 +5,7 @@ exports.connect = () => {
   mongoose
     .connect(process.env.MONGODB_URL, {})
     .then(() => {
-      console.log("database connection established");
+      console.log("database connection established Golu");
     })
     .catch((err) => {
       console.log("database connection error: " + err);
