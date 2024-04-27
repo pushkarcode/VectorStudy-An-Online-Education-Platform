@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const mailSender = require("../utils/mailSender");
 const bcrypt = require("bcrypt");
+const crypto = require("crypto");
 
 // !resetPassword token
 exports.resetPasswordToken = async (req, res) => {
@@ -77,7 +78,7 @@ exports.resetPassword = async (req, res) => {
     // hash password
     const hashedPassword = await bcrypt.hash(password, 10);
     // password update
-    await User.findByIdAndUpdate(
+    await User.findOneAndUpdate(
       { token: token },
       { password: hashedPassword },
       { new: true }
@@ -91,7 +92,7 @@ exports.resetPassword = async (req, res) => {
     console.error(err);
     return res.status(500).json({
       success: false,
-      message: "something went wrong, please try again",
+      message: err.message,
     }); 
   }
 };

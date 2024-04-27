@@ -7,7 +7,7 @@ require("dotenv").config();
 exports.updateProfile = async (req, res) => {
   try {
     // get data
-    const { dateOfBirth = "", about = "", contactNumber } = req.body;
+    const { dateOfBirth = "", about = "", contactNumber, gender="" } = req.body;
     // get userId
     const id = req.user.id;
     // vaildation
@@ -25,6 +25,8 @@ exports.updateProfile = async (req, res) => {
     profileDetails.dateOfBirth = dateOfBirth;
     profileDetails.about = about;
     profileDetails.contactNumber = contactNumber;
+    profileDetails.gender = gender;
+
     await profileDetails.save();
     //    return res
     return res.status(200).json({
@@ -96,61 +98,59 @@ exports.getAllUserDetails = async (req, res) => {
   }
 };
 
-
 // ! update progile picture
 exports.updateDisplayPicture = async (req, res) => {
   try {
-    const displayPicture = req.files.displayPicture
-    const userId = req.user.id
+    const displayPicture = req.files.displayPicture;
+    const userId = req.user.id;
     const image = await uploadImageToCloudinary(
       displayPicture,
       "vectorcode",
       1000,
       1000
-    )
-    console.log(image)
+    );
+    console.log(image);
     const updatedProfile = await User.findByIdAndUpdate(
       { _id: userId },
       { image: image.secure_url },
       { new: true }
-    )
+    );
     res.send({
       success: true,
       message: `Image Updated successfully`,
       data: updatedProfile,
-    })
+    });
   } catch (error) {
     return res.status(500).json({
       success: false,
       message: error.message,
-    })
+    });
   }
 };
-
 
 //! getenrooled courses
 exports.getEnrolledCourses = async (req, res) => {
   try {
-    const userId = req.user.id
+    const userId = req.user.id;
     const userDetails = await User.findOne({
       _id: userId,
     })
       .populate("courses")
-      .exec()
+      .exec();
     if (!userDetails) {
       return res.status(400).json({
         success: false,
         message: `Could not find user with id: ${userDetails}`,
-      })
+      });
     }
     return res.status(200).json({
       success: true,
       data: userDetails.courses,
-    })
+    });
   } catch (error) {
     return res.status(500).json({
       success: false,
       message: error.message,
-    })
+    });
   }
 };

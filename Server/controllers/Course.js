@@ -1,6 +1,6 @@
 const User = require("../models/User");
 const Course = require("../models/Course");
-const uploadImageToCloudinary = require("../utils/imageUploader");
+const { uploadImageToCloudinary } = require("../utils/imageUploader");
 const Category = require("../models/Category");
 
 // createCourse handler function
@@ -16,9 +16,9 @@ exports.createCourse = async (req, res) => {
       tag,
       category,
       instructions,
-      status,
     } = req.body;
     const userId = req.user.id;
+
 
     //get thumbnail
     const thumbnail = req.files.thumbnailImage;
@@ -38,12 +38,17 @@ exports.createCourse = async (req, res) => {
         mesage: "please fill all deatils carefully",
       });
     }
-    if (!status || status === undefined) {
+   
+		// ! testing faild need to create again
+    let status = undefined;
+    if(status === undefined) {
 			status = "Draft";
 		}
 
     // !check for instructer (something fishy)
-    const instructorDetails = await User.findById({ userId });
+    const instructorDetails = await User.findById(userId, {
+			accountType: "Instructor",
+		});
     console.log("Instructer Details: ", instructorDetails);
 
     if (!instructorDetails) {
@@ -65,7 +70,7 @@ exports.createCourse = async (req, res) => {
     // upload image to cludeinary
     const thumbnailImage = await uploadImageToCloudinary(
       thumbnail,
-      process.env.FOLDER_NAME
+      "vectorcode"
     );
 
     // create an entry for new course
@@ -93,8 +98,15 @@ exports.createCourse = async (req, res) => {
       { new: true }
     );
 
-    //update tag schema
-    //return response
+    await Category.findByIdAndUpdate(
+			{ _id: category },
+			{
+				$push: {
+					course: newCourse._id,
+				},
+			},
+			{ new: true }
+		);
 
     return res.status(200).json({
       success: true,
@@ -156,7 +168,7 @@ exports.getAllCourseDetails = async (req, res) => {
         },
       })
       .populate("category")
-      .populate("ratingAndreviews")
+      //.populate("ratingAndreviews")
       .populate({
         path: "courseContent",
         populate: {
@@ -183,7 +195,7 @@ exports.getAllCourseDetails = async (req, res) => {
     console.log(error);
     return res.status(500).json({
       success: false,
-      message: "something went wrong, please try again",
+      message: error.message,
     });
   }
 };

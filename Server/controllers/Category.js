@@ -44,7 +44,7 @@ exports.showAllCategorys = async (req, res) => {
     res.status(200).json({
       success: true,
       message: "All Tages return successful",
-      allTages,
+      allCategory,
     });
   } catch (error) {
     console.log(error);

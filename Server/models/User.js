@@ -61,9 +61,9 @@ const userSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "courseProgress",
   }]
-
-
-});
+},
+{ timestamps: true }
+);
 
 module.exports = mongoose.model("User", userSchema)
    
