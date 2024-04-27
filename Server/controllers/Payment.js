@@ -6,7 +6,6 @@ const {
   courseEnrollmentEmail,
 } = require("../mail/templates/courseEnrollmentEmail");
 const { default: mongoose } = require("mongoose");
-const { default: orders } = require("razorpay/dist/types/orders");
 
 // ! capture the payment and initate the rozarpay order
 exports.capturePayment = async (req, res) => {
