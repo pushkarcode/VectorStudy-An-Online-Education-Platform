@@ -31,14 +31,14 @@ router.post('/addSection',auth,isInstructor, createsection);
 //---------update section -------------------
 router.post('/updateSection',auth,isInstructor, updatesection);
 //---------delete section -------------------
-router.post('/deleteSection',auth,isInstructor, deleteSection);
+router.delete('/deleteSection',auth,isInstructor, deleteSection);
 
 //Add a new sub section to the coursde
 router.post('/addSubSection',auth,isInstructor,createSubsection);
 //update a sub section
-router.post('./updateSubSection',auth,isInstructor,updatedSubsetion);
+router.post('/updateSubSection',auth,isInstructor,updatedSubsetion);
 //delete a sub section
-router.post('./deleteSubSection',auth,isInstructor,deleteSubsection);
+router.delete('/deleteSubSection',auth,isInstructor,deleteSubsection);
 
 
 //! ----------------------- Category Routes only(by Admin)--------------

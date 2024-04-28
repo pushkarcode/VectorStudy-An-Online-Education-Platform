@@ -7,7 +7,12 @@ require("dotenv").config();
 exports.updateProfile = async (req, res) => {
   try {
     // get data
-    const { dateOfBirth = "", about = "", contactNumber, gender="" } = req.body;
+    const {
+      dateOfBirth = "",
+      about = "",
+      contactNumber,
+      gender = "",
+    } = req.body;
     // get userId
     const id = req.user.id;
     // vaildation
@@ -49,15 +54,16 @@ exports.deleteAccount = async (req, res) => {
     // get Id
     const id = req.user.id;
     // vaildation
-    const userDetails = await User.findById(id);
-    if (!userDetails) {
+    console.log("golu kyo" + id);
+    const user = await User.findById({ _id: id });
+    if (!user) {
       return res.status(404).json({
         success: false,
         message: "user not found",
       });
     }
     // delete Profile
-    await Profile.findByIdAndDelete({ _id: userDetails.additionalDetails });
+    await Profile.findByIdAndDelete({ _id: user.additionalDetails });
     //TODO uneroll user from all enrooled couses
 
     // delete user

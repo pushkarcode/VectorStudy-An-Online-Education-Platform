@@ -102,19 +102,22 @@ exports.updatedSubsetion = async (req, res) => {
 exports.deleteSubsection = async (req, res) => {
   try {
     // get the id
-    const { subsectionId, sectionId } = req.params;
-    if (!subsectionId == !sectionId) {
-      return res.status(404).json({
-        success: false,
-        message: "please fill all deatils carefully",
-      });
-    }
+    const { subSectionId, sectionId } = req.body;
+    console.log(subSectionId)
+    console.log(sectionId)
+
+    // if (!subSectionId == !sectionId) {
+    //   return res.status(404).json({
+    //     success: false,
+    //     message: "please fill all deatils carefully",
+    //   });
+    // }
     // validation
     await Section.findByIdAndUpdate(
       { _id: sectionId },
       {
         $pull: {
-          subSection: subsectionId,
+          subSection: subSectionId,
         },
       }
     );
@@ -136,7 +139,7 @@ exports.deleteSubsection = async (req, res) => {
     console.log(error);
     return res.status(500).json({
       success: false,
-      message: "Unable to delete subsection, please try again",
+      message: error.message,
     });
   }
 };
