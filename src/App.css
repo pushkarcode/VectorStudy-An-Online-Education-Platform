@@ -51,3 +51,11 @@ body {
   background-color: rgba(221, 214, 214, 0.682);
   border-radius: 15px;
 }
+
+.code1 {
+  background: radial-gradient(circle, #342A1B 0%, #060F1E);
+}
+.code {
+  background: radial-gradient(circle, #113845 -50%, #060F1E);
+}
+

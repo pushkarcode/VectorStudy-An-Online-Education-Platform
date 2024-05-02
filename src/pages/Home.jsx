@@ -87,6 +87,7 @@ const Home = () => {
                 </nav>
                 </body>`}
             codeColor={"text-yellow-25"}
+            backgroundGradient={"code1"}
           />
         </div>
 
@@ -123,6 +124,8 @@ const Home = () => {
                 }
 export default Home`}
             codeColor={"text-richblack-100"}
+            backgroundGradient={"code"}
+
           />
         </div>
       </div>
