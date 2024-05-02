@@ -5,6 +5,8 @@ import HighlightText from "../components/core/HomePage/HighlightText";
 import CTAButton from "../components/core/HomePage/Button";
 import Banner from "../assets/Images/banner.mp4";
 import CodeBlocks from "../components/core/HomePage/CodeBlocks";
+import TimelineSection from "../components/core/HomePage/TimelineSection";
+import LearningLanguageSection from "../components/core/HomePage/LearningLanguageSection";
 
 const Home = () => {
   return (
@@ -92,7 +94,7 @@ const Home = () => {
         </div>
 
         {/* code section 2 */}
-        <div> 
+        <div>
           <CodeBlocks
             position={"lg:flex-row-reverse"}
             heading={
@@ -125,12 +127,56 @@ const Home = () => {
 export default Home`}
             codeColor={"text-richblack-100"}
             backgroundGradient={"code"}
-
           />
         </div>
       </div>
 
       {/* {section 2} */}
+      <div className="bg-pure-greys-5 text-richblack-700">
+        <div className="homepage_bg h-[40vh]">
+          <div className="w-11/12 max-w-maxContent flex flex-col items-center justify-center gap-5 mx-auto">
+            <div className="h-[15vh]"></div>
+            <div className="flex flex-row gap-7 text-white">
+              <CTAButton active={true} linkto={"/signup"}>
+                <div className="flex items-center gap-x-2">
+                  Explore Full Catalog
+                  <HiArrowRight />
+                </div>
+              </CTAButton>
+
+              <CTAButton active={false} linkto={"/signup"}>
+                <div>Learn More</div>
+              </CTAButton>
+            </div>
+          </div>
+        </div>
+
+        <div className="mx-auto w-11/12 max-w-maxContent flex flex-col items-center justify-between gap-7 mt-20">
+          <div className="flex flex-row gap-x-[12vw] mb-12">
+            <div className="text-[2.2vw] font-semibold leading-9 tracking-tight w-[45%]">
+              Get the Skills you need for a
+              <HighlightText text={"Job that is in demand"} />
+            </div>
+
+            <div className="flex flex-col gap-9 w-[40%] items-start">
+              <p className="text-[1.3vw] font-light text-richblack-800 leading-[1.4vw] tracking-wide">
+                The modern StudyNotion is the dictates its own terms. Today, to
+                be a competitive specialist requires more than professional
+                skills.
+              </p>
+              <CTAButton active={true} linkto={"/signup"}>
+                <div>Learn more</div>
+              </CTAButton>
+            </div>
+          </div>
+
+          <TimelineSection />
+
+          <LearningLanguageSection />
+        </div>
+
+        
+      </div>
 
       {/* {section 3} */}
 

@@ -59,3 +59,6 @@ body {
   background: radial-gradient(circle, #113845 -50%, #060F1E);
 }
 
+.homepage_bg {
+   background: url("./assets/Images/bghome.svg");
+}
