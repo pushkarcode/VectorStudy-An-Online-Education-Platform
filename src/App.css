@@ -3,8 +3,51 @@
 @tailwind components;
 @tailwind utilities;
 
-
-html, body {
-    overflow-x: hidden;
+html,
+body {
+  overflow-x: hidden;
 }
- 
+
+.button {
+  padding: 14px 27px;
+  background-color: transparent;
+  color: #fafafa;
+  font-weight: 900;
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: all linear 0.5s;
+}
+.button::after {
+  content: "";
+  height: 100%;
+  width: 0%;
+  background-color: #3a8ead;
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  transition: all linear 0.5s;
+  z-index: -1;
+}
+.button:hover::after {
+  width: 100%;
+}
+.button:hover {
+  color: black;
+}
+
+*::selection {
+  color: #d3c0c0;
+  background-color: #065671;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+  background-color: #000814;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(221, 214, 214, 0.682);
+  border-radius: 15px;
+}
