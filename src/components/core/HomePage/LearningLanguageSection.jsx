@@ -36,7 +36,7 @@ const LearningLanguageSection = () => {
             className="object-contain -ml-36"
           />
         </div>
-        <div className="w-fit">
+        <div className="w-fit mb-12">
         <CTAButton active={true} linkto={"/signup"}> 
               <div>
                 Learn more

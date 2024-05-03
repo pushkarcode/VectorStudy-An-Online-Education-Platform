@@ -7,6 +7,9 @@ import Banner from "../assets/Images/banner.mp4";
 import CodeBlocks from "../components/core/HomePage/CodeBlocks";
 import TimelineSection from "../components/core/HomePage/TimelineSection";
 import LearningLanguageSection from "../components/core/HomePage/LearningLanguageSection";
+import InstructorSection from "../components/core/HomePage/InstructorSection";
+import Footer from "../components/common/Footer";
+import ExploreMore from "../components/core/HomePage/ExploreMore";
 
 const Home = () => {
   return (
@@ -129,12 +132,15 @@ export default Home`}
             backgroundGradient={"code"}
           />
         </div>
+
+       <ExploreMore/>
+
       </div>
 
       {/* {section 2} */}
       <div className="bg-pure-greys-5 text-richblack-700">
-        <div className="homepage_bg h-[40vh]">
-          <div className="w-11/12 max-w-maxContent flex flex-col items-center justify-center gap-5 mx-auto">
+        <div className="homepage_bg h-[40vh] p-1">
+          <div className="w-11/12 max-w-maxContent flex flex-col items-center justify-center gap-5 mx-auto mt-16">
             <div className="h-[15vh]"></div>
             <div className="flex flex-row gap-7 text-white">
               <CTAButton active={true} linkto={"/signup"}>
@@ -180,7 +186,17 @@ export default Home`}
 
       {/* {section 3} */}
 
+      <div className="w-11/12 mx-auto max-w-maxContent flex-row items-center justify-between gap-8 first-letter bg-richblack-900 text-white mb-16">
+        <InstructorSection/>
+
+        <h2 className="text-center text-4xl font-semibold mt-10">Review from other Learners</h2>
+        {/* review slider here */}
+
+
+      </div>
+
       {/* { footer} */}
+      <Footer/>
     </div>
   );
 };
