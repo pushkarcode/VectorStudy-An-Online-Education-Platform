@@ -51,7 +51,9 @@ const TimelineSection = () => {
                   </div>
                 </div>
                 {elem.active && (
-                  <div className={`border-l-[1px] border-richblue-300 border-dotted h-[60px] ml-6`}></div>
+                  <div
+                    className={`border-l-[1px] border-richblue-300 border-dotted h-[60px] ml-6`}
+                  ></div>
                 )}
               </>
             );
@@ -60,9 +62,26 @@ const TimelineSection = () => {
 
         {/* right wala part */}
         <div className="relative shadow-[0px_-7px_50px_-5px] shadow-richblue-200">
-          <img src={timelineImage} alt="golu" className="shadow-white shadow-[20px_20px_0px_0px]  object-cover rounded-sm" />
+          <img
+            src={timelineImage}
+            alt="golu"
+            className="shadow-white shadow-[20px_20px_0px_0px]  object-cover rounded-sm"
+          />
 
-          <div className="absolute">
+          <div className="absolute translate-x-[10%] -translate-y-[50%] bg-caribbeangreen-700 flex flex-row text-white uppercase py-8 px-2 shadow-[0_10px_20px_rgba(240,_46,_170,_0.7)]">
+            <div className="flex flex-row gap-5 items-center border-r border-caribbeangreen-300 px-7 ">
+              <p className="text-3xl font-bold">10</p>
+              <p className="text-caribbeangreen-300 text-sm">
+                Years of Experience
+              </p>
+            </div>
+
+            <div className="flex gap-5 items-center px-7">
+              <p className="text-3xl font-bold">250</p>
+              <p className="text-caribbeangreen-300 text-sm">
+                Type of Courses
+              </p>
+            </div>
 
           </div>
         </div>
