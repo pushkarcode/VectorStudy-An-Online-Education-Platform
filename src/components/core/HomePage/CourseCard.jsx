@@ -4,8 +4,8 @@ import { MdOutlineOndemandVideo, MdPeople } from "react-icons/md";
 const CourseCard = ({ cardData, currentCard, setCurrentCard }) => {
   return (
     <div>
-      <div className="bg-richblack-800 w-[23vw] h-[37vh] rounded-sm p-5 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
-        <p className="text-[1.6vw] font-semibold text-richblue-25 mb-1">
+      <div className="bg-richblack-800 lg:w-[23vw] w-[90vw] lg:h-[37vh] rounded-sm p-5 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] mt-7">
+        <p className="lg:text-[1.6vw] text-[6vw] font-semibold text-richblue-25 mb-1">
           {cardData.heading}
         </p>
         <p className="font-medium text-richblack-400 leading-5 mt-3 h-[15vh]">

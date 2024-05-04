@@ -26,16 +26,16 @@ const ExploreMore = () => {
 
   return (
     <div className="relative">
-      <div className="text-4xl font-semibold text-center">
+      <div className="lg:text-4xl text-[7.4vw] ml-[35vw] lg:ml-0 font-semibold  lg:text-center">
         Unlock the
         <HighlightText text={" Power of Code"} />
       </div>
 
-      <p className="text-center text-richblack-300 text-lg font-semibold mt-2 ">
+      <p className="lg:text-center ml-[35vw] lg:ml-0 text-richblack-300 text-lg font-semibold mt-2 ">
         Learn to build anything you can imagine
       </p>
 
-      <div className="flex flex-row rounded-full bg-richblack-800 mt-5 mb-6 border-b border-richblack-500  ">
+      <div className="flex flex-row opacity-0 lg:opacity-100 rounded-full bg-richblack-800 mt-5 lg:mb-6 mb-[80vh] border-b border-richblack-500  ">
         {tabsName.map((elem, id) => {
           return (
             <div
@@ -55,7 +55,7 @@ const ExploreMore = () => {
 
       <div className="lg:h-[20vh]"></div>
       {/* course card ka group  */}
-      <div className="absolute flex -translate-x-[50%] translate-y-[50%] top-[15%] left-[28%] gap-x-20 w-full">
+      <div className="absolute lg:flex  lg:-translate-x-[50%] lg:translate-y-[50%] lg:top-[6%] top-[16%] lg:left-[28%] left-[22%] lg:gap-x-20 lg:w-full">
         {courses.map((elem, id) => {
           return (
              <CourseCard

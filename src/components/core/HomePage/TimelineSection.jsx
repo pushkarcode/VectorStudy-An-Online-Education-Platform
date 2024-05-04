@@ -34,12 +34,12 @@ const timeline = [
 const TimelineSection = () => {
   return (
     <div>
-      <div className="flex flex-row gap-x-[5vw] items-center">
-        <div className="w-[45%] flex flex-col gap-3">
+      <div className="lg:flex flex-row  gap-x-[5vw] items-center">
+        <div className="lg:w-[45%] flex flex-col lg:gap-3 gap-y-1">
           {timeline.map((elem, index) => {
             return (
               <>
-                <div key={index} className="flex flex-row gap-6">
+                <div key={index} className="flex flex-row lg:gap-6 gap-x-6">
                   <div className="w-[50px] h-[50px] bg-white flex items-center justify-center rounded-full">
                     <img src={elem.Logo} alt="golu" />
                   </div>
@@ -61,15 +61,15 @@ const TimelineSection = () => {
         </div>
 
         {/* right wala part */}
-        <div className="relative shadow-[0px_-7px_50px_-5px] shadow-richblue-200">
+        <div className="relative shadow-[0px_-7px_50px_-5px] shadow-richblue-200 mt-16 lg:mt-0">
           <img
             src={timelineImage}
             alt="golu"
             className="shadow-white shadow-[20px_20px_0px_0px]  object-cover rounded-sm"
           />
 
-          <div className="absolute translate-x-[10%] -translate-y-[50%] bg-caribbeangreen-700 flex flex-row text-white uppercase py-8 px-2 shadow-[0_10px_20px_rgba(240,_46,_170,_0.7)]">
-            <div className="flex flex-row gap-5 items-center border-r border-caribbeangreen-300 px-7 ">
+          <div className="absolute lg:translate-x-[10%]  lg:-translate-y-[50%] bg-caribbeangreen-700 flex flex-row text-white uppercase py-8 px-2 shadow-[0_10px_20px_rgba(240,_46,_170,_0.7)]">
+            <div className="flex flex-row gap-5 items-center border-r border-caribbeangreen-300 lg:px-7 ">
               <p className="text-3xl font-bold">10</p>
               <p className="text-caribbeangreen-300 text-sm">
                 Years of Experience
