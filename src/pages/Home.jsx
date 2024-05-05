@@ -190,6 +190,7 @@ export default Home`}
         <InstructorSection/>
 
         <h2 className="text-center text-4xl font-semibold mt-10">Review from other Learners</h2>
+        
         {/* review slider here */}
 
 

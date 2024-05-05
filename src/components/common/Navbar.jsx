@@ -8,28 +8,28 @@ import { apiConnector } from "../../services/apiconnector";
 import { categories } from "../../services/apis";
 import { IoIosArrowDown } from "react-icons/io";
 
-const subLinks = [
-  {
-    title: "python",
-    link: "catalog/python",
-  },
-  {
-    title: "web dev",
-    link: "catalog/web-development",
-  },
-  {
-    title: "backend dev",
-    link: "catalog/backend-development",
-  },
-  {
-    title: "front dev",
-    link: "catalog/frontend-development",
-  },
-  {
-    title: "front dev",
-    link: "catalog/frontend-development",
-  },
-];
+// const subLinks = [
+//   {
+//     title: "python",
+//     link: "catalog/python",
+//   },
+//   {
+//     title: "web dev",
+//     link: "catalog/web-development",
+//   },
+//   {
+//     title: "backend dev",
+//     link: "catalog/backend-development",
+//   },
+//   {
+//     title: "front dev",
+//     link: "catalog/frontend-development",
+//   },
+//   {
+//     title: "front dev",
+//     link: "catalog/frontend-development",
+//   },
+// ];
 
 const Navbar = () => {
   const { token } = useSelector((state) => state.auth);
@@ -37,21 +37,21 @@ const Navbar = () => {
   const { totalItems } = useSelector((state) => state.cart);
   const location = useLocation();
 
-  // const [subLinks, setSubLinks] = useState([]);
+  const [subLinks, setSubLinks] = useState([]);
 
-  // const fetchSubliks = async () => {
-  //   try {
-  //     const result = await apiConnector("GET", categories.CATEGORIES_API);
-  //     console.log("priting SUblinks result:", result);
-  //     setSubLinks(result.data.data);
-  //   } catch (error) {
-  //     console.log("Cloud not fetch the categroy list", error);
-  //   }
-  // };
+  const fetchSubliks = async () => {
+    try {
+      const result = await apiConnector("GET", categories.CATEGORIES_API);
+      console.log("priting SUblinks result:", result);
+      setSubLinks(result.data.data);
+    } catch (error) {
+      console.log("Cloud not fetch the categroy list", error);
+    }
+  };
 
-  // useEffect(() => {
-  //   fetchSubliks();
-  // }, []);
+  useEffect(() => {
+    fetchSubliks();
+  }, []);
 
   const matchRoute = (route) => {
     return matchPath({ path: route }, location.pathname);
@@ -98,7 +98,7 @@ const Navbar = () => {
                       className={`${
                         matchRoute(link?.path)
                           ? "text-yellow-25"
-                          : "ring-richblack-25"
+                          : "text-richblack-25"
                       }`}
                     >
                       {link.title}
@@ -109,6 +109,8 @@ const Navbar = () => {
             ))}
           </ul>
         </nav>
+
+
 
         {/*  Golu-->Login/SignUp/Dashboard  */}
         <div className="flex gap-x-4 items-center">
