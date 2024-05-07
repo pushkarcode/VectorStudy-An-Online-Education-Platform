@@ -5,7 +5,7 @@ import Logo3 from "../../../assets/TimeLineLogo/Logo3.svg";
 import Logo4 from "../../../assets/TimeLineLogo/Logo4.svg";
 import timelineImage from "../../../assets/Images/TimelineImage.png";
 
-const timeline = [
+const TimeLine = [
   {
     Logo: Logo1,
     Heading: "Leadership",
@@ -36,26 +36,24 @@ const TimelineSection = () => {
     <div>
       <div className="lg:flex flex-row  gap-x-[5vw] items-center">
         <div className="lg:w-[45%] flex flex-col lg:gap-3 gap-y-1">
-          {timeline.map((elem, index) => {
+        {TimeLine.map((ele, i) => {
             return (
-              <>
-                <div key={index} className="flex flex-row lg:gap-6 gap-x-6">
-                  <div className="w-[50px] h-[50px] bg-white flex items-center justify-center rounded-full">
-                    <img src={elem.Logo} alt="golu" />
+              <div className="flex flex-col lg:gap-3" key={i}>
+                <div className="flex gap-6" key={i}>
+                  <div className="w-[52px] h-[52px] bg-white rounded-full flex justify-center items-center shadow-[#00000012] shadow-[0_0_62px_0]">
+                    <img src={ele.Logo} alt="" />
                   </div>
                   <div>
-                    <h2 className="font-semibold text-[18px]">
-                      {elem.Heading}
-                    </h2>
-                    <p className="text-base">{elem.Description}</p>
+                    <h2 className="font-semibold text-[18px]">{ele.Heading}</h2>
+                    <p className="text-base">{ele.Description}</p>
                   </div>
                 </div>
-                {elem.active && (
-                  <div
-                    className={`border-l-[1px] border-richblue-300 border-dotted h-[60px] ml-6`}
-                  ></div>
-                )}
-              </>
+                <div
+                  className={`hidden ${
+                    TimeLine.length - 1 === i ? "hidden" : "lg:block"
+                  }  h-14 border-dotted border-r border-richblack-100 bg-richblack-400/0 w-[26px]`}
+                ></div>
+              </div>
             );
           })}
         </div>

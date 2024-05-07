@@ -1,10 +1,10 @@
 const otpTemplate = (otp) => {
-	return `<!DOCTYPE html>
+  return `<!DOCTYPE html>
 	<html>
 	
 	<head>
 		<meta charset="UTF-8">
-		<title>OTP Verification Email</title>
+		<title>OTP Verification Email🔥</title>
 		<style>
 			body {
 				background-color: #ffffff;
@@ -31,7 +31,7 @@ const otpTemplate = (otp) => {
 			.message {
 				font-size: 18px;
 				font-weight: bold;
-				margin-bottom: 20px;
+				margin-bottom: 18px;
 			}
 	
 			.body {
@@ -60,25 +60,44 @@ const otpTemplate = (otp) => {
 			.highlight {
 				font-weight: bold;
 			}
+			.anchor {
+				text-decoration: none;
+				color: inherit;
+			  }
+		   .push{
+			display: inline;
+			padding: .5vw .7vw;
+			border-radius: .6vw;
+			font-size: 2vw;
+			font-weight: 600;
+			background-color: yellow;
+			font-family: "Gilroy";
+			font-size: 20px;
+			margin-bottom: 30px;
+		   }
+		   .golu {
+			   font-weight: 100;
+			   color: rgb(36, 28, 43);
+		   }
 		</style>
 	
 	</head>
 	
 	<body>
 		<div class="container">
-			<a href="https://studynotion-edtech-project.vercel.app"><img class="logo"
-					src="https://i.ibb.co/7Xyj3PC/logo.png" alt="StudyNotion Logo"></a>
-			<div class="message">OTP Verification Email</div>
+		<a class="anchor" href="#"
+        ><p class="push"><span class="golu">𐎏</span>VectorStudy</p></a>
+			<div class="message">OTP Verification Email🔥</div>
 			<div class="body">
 				<p>Dear User,</p>
-				<p>Thank you for registering with StudyNotion. To complete your registration, please use the following OTP
+				<p>Thank you for registering with VectorStudy. To complete your registration, please use the following OTP
 					(One-Time Password) to verify your account:</p>
 				<h2 class="highlight">${otp}</h2>
 				<p>This OTP is valid for 5 minutes. If you did not request this verification, please disregard this email.
 				Once your account is verified, you will have access to our platform and its features.</p>
 			</div>
 			<div class="support">If you have any questions or need assistance, please feel free to reach out to us at <a
-					href="mailto:info@studynotion.com">info@studynotion.com</a>. We are here to help!</div>
+					href="mailto:info@vectorstudy.com">info@vectorstudy.com</a>. We are here to help!</div>
 		</div>
 	</body>
 	

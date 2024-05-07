@@ -61,14 +61,33 @@ exports.courseEnrollmentEmail = (courseName, name) => {
             .highlight {
                 font-weight: bold;
             }
+            .anchor {
+				text-decoration: none;
+				color: inherit;
+			  }
+		   .push{
+			display: inline;
+			padding: .5vw .7vw;
+			border-radius: .6vw;
+			font-size: 2vw;
+			font-weight: 600;
+			background-color: yellow;
+			font-family: "Gilroy";
+			font-size: 20px;
+			margin-bottom: 30px;
+		   }
+		   .golu {
+			   font-weight: 100;
+			   color: rgb(36, 28, 43);
+		   }
         </style>
     
     </head>
     
     <body>
         <div class="container">
-            <a href="https://studynotion-edtech-project.vercel.app"><img class="logo" src="https://i.ibb.co/7Xyj3PC/logo.png"
-                    alt="StudyNotion Logo"></a>
+        <a class="anchor" href="https://studynotion-edtech-project.vercel.app"
+        ><p class="push"><span class="golu">𐎏</span>VectorStudy</p></a>
             <div class="message">Course Registration Confirmation</div>
             <div class="body">
                 <p>Dear ${name},</p>
@@ -79,7 +98,7 @@ exports.courseEnrollmentEmail = (courseName, name) => {
                 <a class="cta" href="https://studynotion-edtech-project.vercel.app/dashboard">Go to Dashboard</a>
             </div>
             <div class="support">If you have any questions or need assistance, please feel free to reach out to us at <a
-                    href="mailto:info@studynotion.com">info@studynotion.com</a>. We are here to help!</div>
+                    href="mailto:info@vectorstudy.com">info@vectorstudy.com</a>. We are here to help!</div>
         </div>
     </body>
     
