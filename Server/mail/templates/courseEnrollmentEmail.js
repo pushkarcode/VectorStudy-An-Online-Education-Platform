@@ -33,6 +33,7 @@ exports.courseEnrollmentEmail = (courseName, name) => {
                 font-size: 18px;
                 font-weight: bold;
                 margin-bottom: 20px;
+                margin-top: 1.5vw;
             }
     
             .body {
@@ -75,6 +76,7 @@ exports.courseEnrollmentEmail = (courseName, name) => {
 			font-family: "Gilroy";
 			font-size: 20px;
 			margin-bottom: 30px;
+            color: rgb(36, 28, 43);
 		   }
 		   .golu {
 			   font-weight: 100;

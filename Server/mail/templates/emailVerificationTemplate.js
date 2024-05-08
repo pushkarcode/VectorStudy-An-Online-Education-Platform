@@ -32,6 +32,7 @@ const otpTemplate = (otp) => {
 				font-size: 18px;
 				font-weight: bold;
 				margin-bottom: 18px;
+				margin-top: 1.7vw;
 			}
 	
 			.body {
@@ -73,7 +74,8 @@ const otpTemplate = (otp) => {
 			background-color: yellow;
 			font-family: "Gilroy";
 			font-size: 20px;
-			margin-bottom: 30px;
+			margin-bottom: 7vw;
+			color: rgb(36, 28, 43);
 		   }
 		   .golu {
 			   font-weight: 100;
