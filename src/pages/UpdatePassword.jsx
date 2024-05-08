@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import Loader from "../components/common/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { resetPassword } from "../services/operations/authAPI";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { GoArrowLeft } from "react-icons/go";
 
 const UpdatePassword = () => {
   const dispatch = useDispatch();
+  const nevigate = useNavigate();
   const location = useLocation();
   const [formData, setFormData] = useState({
     password: "",
@@ -29,7 +30,7 @@ const UpdatePassword = () => {
   const handleOnSubmit = (e) => {
     e.preventDefault();
     const token = location.pathname.split('/').at(-1);
-    dispatch(resetPassword(password, confirmPassword, token));
+    dispatch(resetPassword(password, confirmPassword, token,nevigate));
   };
 
   return (
