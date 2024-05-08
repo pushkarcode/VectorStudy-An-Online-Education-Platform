@@ -1,3 +1,4 @@
 # VectorStudy --> An Online Education Platfrom
 
-                                                  ![alt text](image.png)
+- UI/Ux of website
+  ![alt text](image.png)
