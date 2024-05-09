@@ -8,6 +8,7 @@ import FoundingStory from "../assets/Images/FoundingStory.png";
 import StateSection from "../components/core/AboutPage/StateSection";
 import LearinigGrid from "../components/core/AboutPage/LearinigGrid";
 import ContactFromSection from "../components/core/AboutPage/ContactFromSection";
+import Footer from "../components/common/Footer";
 
 const AboutUs = () => {
   return (
@@ -124,14 +125,18 @@ const AboutUs = () => {
 
       {/* section 4 */}
       <StateSection />
-     
+
       {/* section 5 */}
       <section className="w-11/12 mx-auto mb-[12vw]">
-        <LearinigGrid/>
-        <ContactFromSection/>
+        <LearinigGrid />
+        <ContactFromSection />
       </section>
-     
 
+      <section>
+        <div className="text-center font-bold text-3xl text-richblack-5">Review Slider</div>
+      </section>
+
+      <Footer/>
     </div>
   );
 };

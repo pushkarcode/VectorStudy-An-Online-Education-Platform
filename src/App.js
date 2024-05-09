@@ -9,6 +9,7 @@ import ForgetPassword from "./pages/ForgetPassword";
 import UpdatePassword from "./pages/UpdatePassword";
 import VerifyEmail from "./pages/VerifyEmail";
 import AboutUs from "./pages/AboutUs";
+import Contact from "./pages/Contact";
 
 function App() {
   return (
@@ -63,6 +64,14 @@ function App() {
           element={
             <OpenRoute>
               <AboutUs />
+            </OpenRoute>
+          }
+        />
+         <Route
+          path="contact"
+          element={
+            <OpenRoute>
+              <Contact />
             </OpenRoute>
           }
         />
