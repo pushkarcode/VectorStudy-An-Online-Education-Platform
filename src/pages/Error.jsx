@@ -3,9 +3,8 @@ import Image from "../assets/Images/404page.jpg"
 
 const Error = () => {
   return (
-    <div className='flex flex-col justify-center items-center'>
-        <img src={Image} className='object-cover' alt="" />
-        <p className='text-3xl text-brown-600'>Error - 404 Not found</p>
+    <div className='flex flex-col justify-center items-center h-[90vh] '>
+        <img src={Image} className='object-cover rounded-md shadow-[rgba(0,_0,_0,_0.4)_0px_30px_90px]' alt="" />
     </div>
   )
 }

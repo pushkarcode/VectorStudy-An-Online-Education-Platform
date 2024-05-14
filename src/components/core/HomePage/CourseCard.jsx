@@ -1,25 +1,46 @@
 import React from "react";
-import { MdOutlineOndemandVideo, MdPeople } from "react-icons/md";
 
-const CourseCard = ({ cardData, currentCard, setCurrentCard }) => {
+// Importing React Icons
+import { HiUsers } from "react-icons/hi";
+import { ImTree } from "react-icons/im";
+
+const CourseCard = ({cardData, currentCard, setCurrentCard}) => {
   return (
-    <div>
-      <div className="bg-richblack-800 lg:w-[23vw] w-[90vw] lg:h-[37vh] rounded-sm p-5 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px] mt-7">
-        <p className="lg:text-[1.6vw] text-[6vw] font-semibold text-richblue-25 mb-1">
-          {cardData.heading}
-        </p>
-        <p className="font-medium text-richblack-400 leading-5 mt-3 h-[15vh]">
-          {cardData.description}
-        </p>
-        <div className="flex items-center justify-between mt-8 border-t-2 border-dashed border-richblack-500 text-richblack-200">
-          <p className="mt-2 flex items-center gap-1">
-            <MdPeople />
-            {cardData.level}
-          </p>
-          <p className="mt-2 flex items-center gap-1">
-            <MdOutlineOndemandVideo />
-            {cardData.lessionNumber} Lession
-          </p>
+    <div
+      className={`w-[360px] lg:w-[32%]  ${
+        currentCard === cardData?.heading
+          ? "bg-white shadow-[12px_12px_0_0] shadow-yellow-50"
+          : "bg-richblack-800"
+      }  text-richblack-25 h-[300px] box-border cursor-pointer`}
+      onClick={() => setCurrentCard(cardData?.heading)}
+    >
+      <div className="border-b-[2px] border-richblack-400 border-dashed h-[80%] p-6 flex flex-col gap-3">
+        <div
+          className={` ${
+            currentCard === cardData?.heading && "text-richblack-800"
+          } font-semibold text-[20px]`}
+        >
+          {cardData?.heading}
+        </div>
+
+        <div className="text-richblack-400">{cardData?.description}</div>
+      </div>
+
+      <div
+        className={`flex justify-between ${
+          currentCard === cardData?.heading ? "text-blue-300" : "text-richblack-300"
+        } px-6 py-3 font-medium`}
+      >
+        {/* Level */}
+        <div className="flex items-center gap-2 text-[16px]">
+          <HiUsers />
+          <p>{cardData?.level}</p>
+        </div>
+
+        {/* Flow Chart */}
+        <div className="flex items-center gap-2 text-[16px]">
+          <ImTree />
+          <p>{cardData?.lessionNumber} Lession</p>
         </div>
       </div>
     </div>

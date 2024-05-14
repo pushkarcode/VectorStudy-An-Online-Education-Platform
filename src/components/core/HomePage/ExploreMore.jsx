@@ -53,18 +53,19 @@ const ExploreMore = () => {
         })}
       </div>
 
-      <div className="lg:h-[20vh]"></div>
+      <div className="hidden lg:block lg:h-[200px]"></div>
+
       {/* course card ka group  */}
-      <div className="absolute lg:flex  lg:-translate-x-[50%] lg:translate-y-[50%] lg:top-[6%] top-[16%] lg:left-[28%] left-[22%] lg:gap-x-20 lg:w-full">
-        {courses.map((elem, id) => {
+      <div className="lg:absolute gap-10 justify-center lg:gap-5 flex lg:justify-between flex-wrap lg:bottom-[0] lg:left-[50%] lg:translate-x-[-50%] lg:translate-y-[50%] text-black lg:mb-0 mb-7 lg:px-0 px-3 w-[70vw] ">
+        {courses.map((ele, index) => {
           return (
-             <CourseCard
-             key={id}
-             cardData = {elem}
-             currentCard = {currentCard}
-             setCurrentCard = {setCurrentCard}
-              />
-             );
+            <CourseCard
+              key={index}
+              cardData={ele}
+              currentCard={currentCard}
+              setCurrentCard={setCurrentCard}
+            />
+          );
         })}
       </div>
     </div>

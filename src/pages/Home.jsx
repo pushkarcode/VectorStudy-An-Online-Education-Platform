@@ -72,13 +72,13 @@ const Home = () => {
               "Our courses are designed and taught by industry experts who have years of experience in coding and are passionate about sharing their knowledge with you."
             }
             ctabtn1={{
-              btnText: "try it yourself",
-              linkto: "/signup",
+              btnText: "Try it Yourself",
+              link: "/signup",
               active: true,
             }}
             ctabtn2={{
-              btnText: "learn more",
-              linkto: "/login",
+              btnText: "Learn more",
+              link: "/signup",
               active: false,
             }}
             codeblock={` <!DOCTYPE html>
@@ -92,7 +92,7 @@ const Home = () => {
                 </nav>
                 </body>`}
             codeColor={"text-yellow-25"}
-            backgroundGradient={"code1"}
+            backgroundGradient={<div className="code1 absolute"></div>}
           />
         </div>
 
@@ -110,12 +110,12 @@ const Home = () => {
             }
             ctabtn1={{
               btnText: "Continue Lesson",
-              linkto: "/signup",
+              link: "/signup",
               active: true,
             }}
             ctabtn2={{
-              btnText: "learn more",
-              linkto: "/login",
+              btnText: "Learn More",
+              link: "/signup",
               active: false,
             }}
             codeblock={`import React from 'react'
@@ -129,12 +129,12 @@ const Home = () => {
                 }
 export default Home`}
             codeColor={"text-richblack-100"}
-            backgroundGradient={"code"}
+            backgroundGradient={<div className="code absolute"></div>}
+
           />
         </div>
 
-       <ExploreMore/>
-
+        <ExploreMore />
       </div>
 
       {/* {section 2} */}
@@ -180,24 +180,22 @@ export default Home`}
 
           <LearningLanguageSection />
         </div>
-
-        
       </div>
 
       {/* {section 3} */}
 
       <div className="w-11/12 mx-auto max-w-maxContent flex-row items-center justify-between gap-8 first-letter bg-richblack-900 text-white mb-16">
-        <InstructorSection/>
+        <InstructorSection />
 
-        <h2 className="text-center text-4xl font-semibold mt-10">Review from other Learners</h2>
-        
+        <h2 className="text-center text-4xl font-semibold mt-10">
+          Review from other Learners
+        </h2>
+
         {/* review slider here */}
-
-
       </div>
 
       {/* { footer} */}
-      <Footer/>
+      <Footer />
     </div>
   );
 };

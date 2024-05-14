@@ -11,7 +11,9 @@ import VerifyEmail from "./pages/VerifyEmail";
 import AboutUs from "./pages/AboutUs";
 import Contact from "./pages/Contact";
 import MyProfile from "./components/core/Dashboard/MyProfile";
-import Dashboard from "./pages/Dashbord"
+import Dashboard from "./pages/Dashbord";
+import PrivateRoute from "./components/core/Auth/PrivateRoute";
+import Error from "./pages/Error";
 
 function App() {
   return (
@@ -84,9 +86,14 @@ function App() {
               <Dashboard />
             </PrivateRoute>
           }
-        />
-      
-        <Route path="dashboard/my-profile" element={<MyProfile />} />
+        >
+          <Route path="dashboard/my-profile" element={<MyProfile />} />
+          {/* <Route path="dashboard/settings" element={<Setting />} /> */}
+
+        </Route>
+
+
+        <Route path="*" element={<Error />} />
       </Routes>
     </div>
   );
