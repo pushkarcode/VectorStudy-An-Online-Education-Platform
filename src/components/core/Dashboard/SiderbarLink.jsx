@@ -1,12 +1,13 @@
 import React from "react";
 import * as Icons from "react-icons/vsc";
 import { useDispatch } from "react-redux";
-import { NavLink, matchPath, useLocation } from "react-router-dom";
+import { NavLink, matchPath, useLocation, useNavigate } from "react-router-dom";
 
 const SiderbarLink = ({ link, iconName }) => {
   const Icon = Icons[iconName];
   const location = useLocation();
   const dispatch = useDispatch();
+  const navigate  = useNavigate()
 
   const matchRoute = (route) => {
     return matchPath({ path: route }, location.pathname);
@@ -15,7 +16,8 @@ const SiderbarLink = ({ link, iconName }) => {
   return (
     <NavLink
       to={link.path}
-      onClick={() => dispatch()}
+      onClick={() => navigate("/dashboard/settings") } //! ye sirt testing purpas ke liye hhai eska nastwikta sai kio sambandha nahi hai
+      
       className={`relative px-8 py-2 text-sm font-medium ${
         matchRoute(link.path)
           ? "bg-yellow-800 text-yellow-50"
