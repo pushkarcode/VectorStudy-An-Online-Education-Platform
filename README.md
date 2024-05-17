@@ -4,3 +4,4 @@
   ![alt text](image.png)
 - React based Stricture
 - Backend Controllers Added
+- Payment Integration Added
