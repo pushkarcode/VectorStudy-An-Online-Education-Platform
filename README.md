@@ -6,4 +6,4 @@
 - Backend Controllers Added
 - Payment Integration Added
 - Modules added
-- Controllers Added & Modal
+- Controllers Added
