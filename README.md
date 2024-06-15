@@ -8,6 +8,7 @@
 - Modules added
 - Controllers Added
 - Backend Completd
-- Testing Completed 
+- Testing Completed
+- Creating a payment option
 
 
