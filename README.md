@@ -4,3 +4,11 @@
   ![alt text](image.png)
 - React based Stricture
 - Backend Controllers Added
+- Payment Integration Added
+- Modules added
+- Controllers Added
+- Backend Completd
+- Testing Completed
+- Creating a payment option
+- Final feature added
+
