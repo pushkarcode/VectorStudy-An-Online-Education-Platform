@@ -1,60 +1,59 @@
-// * big things are happing in few days
 const express = require("express");
-const db = require("./config/database");
-const cookieParser = require('cookie-parser');
-const cors = require('cors');
-const fileUpload = require("express-fileupload");
-require("dotenv").config();
-const cloudinary = require("./config/cloudinary");
-
-
-
 const app = express();
-// port find out
-const PORT = process.env.PORT || 5000;
 
-//Database Connection
-db.connect();
+const userRoutes = require("./routes/User");
+const profileRoutes = require("./routes/Profile");
+const paymentRoutes = require("./routes/Payments");
+const courseRoutes = require("./routes/Course");
+const contactUsRoute = require("./routes/Contact");
+const database = require("./config/database");
+const cookieParser = require("cookie-parser");
+const cors = require("cors");
+const {cloudinaryConnect } = require("./config/cloudinary");
+const fileUpload = require("express-fileupload");
+const dotenv = require("dotenv");
 
-//middleswares
+dotenv.config();
+const PORT = process.env.PORT || 4000;
+
+//database connect
+database.connect();
+//middlewares
 app.use(express.json());
 app.use(cookieParser());
 app.use(
-  cors({
-    origin:"http://localhost:3000",
-    credentials: true,
-  })
-);
-app.use(fileUpload({
-  useTempFiles : true,
-  tempFileDir : '/tmp/'
-}));
+	cors({
+		origin:"http://localhost:3000",
+		credentials:true,
+	})
+)
 
-//connect with cloude
-cloudinary.cloudinaryConnect();
+app.use(
+	fileUpload({
+		useTempFiles:true,
+		tempFileDir:"/tmp",
+	})
+)
+//cloudinary connection
+cloudinaryConnect();
 
-// api route mount
-const courseRoutes = require("./routes/Course");
-const paymentsRoutes = require("./routes/Payments");
-const profileRoutes = require("./routes/Profile");
-const userRoutes = require("./routes/User");
+//routes
+app.use("/api/v1/auth", userRoutes);
+app.use("/api/v1/profile", profileRoutes);
+app.use("/api/v1/course", courseRoutes);
+app.use("/api/v1/payment", paymentRoutes);
+app.use("/api/v1/reach", contactUsRoute);
 
-app.use("/api/v1/auth", userRoutes)
-app.use("/api/v1/profile", profileRoutes)
-app.use("/api/v1/course", courseRoutes)
-app.use("/api/v1/payment", paymentsRoutes)
+//def route
 
-
-//activate server
-app.listen(PORT, () => {
-  console.log(`App listening on port ${PORT}`);
+app.get("/", (req, res) => {
+	return res.json({
+		success:true,
+		message:'Your server is up and running....'
+	});
 });
 
-
-//! default route
-app.get("/", () => {
-    return res.json({
-      success: true,
-      message: "Welcome to Vector Study Platform",
-    })
+app.listen(PORT, () => {
+	console.log(`App is running at ${PORT}`)
 })
+

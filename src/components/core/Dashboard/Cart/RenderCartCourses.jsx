@@ -3,7 +3,7 @@ import { RiDeleteBin6Line } from "react-icons/ri"
 import { useDispatch, useSelector } from "react-redux"
 
 import ReactStars from "react-stars"
-import { removeFromCart } from "../../../../slice/cartSlice"
+import { removeFromCart } from "../../../../slices/cartSlice"
 
 export default function RenderCartCourses() {
   const { cart } = useSelector((state) => state.cart)

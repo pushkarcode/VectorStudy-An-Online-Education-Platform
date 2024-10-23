@@ -1,26 +1,25 @@
-// Import required modules
-const express = require("express");
-const router = express.Router();
-
-//! Importing All Midlewares
-const { auth } = require("../middlewares/auth");
-
+const express = require("express")
+const router = express.Router()
+const { auth, isInstructor } = require("../middlewares/auth")
 const {
-  updateProfile,
   deleteAccount,
+  updateProfile,
   getAllUserDetails,
   updateDisplayPicture,
   getEnrolledCourses,
-} = require("../controllers/Profile");
+  instructorDashboard,
+} = require("../controllers/Profile")
 
-//! ------------------------------> PROFLE ROIUTES <---------------
-
-router.delete("/deleteProfile",auth, deleteAccount);
-router.put("/updateProfile", auth, updateProfile);
-router.get("/getUserDetails", auth, getAllUserDetails);
-// get enrolled
-router.get("/getEnrolledCourses", auth, getEnrolledCourses);
+// ********************************************************************************************************
+//                                      Profile routes
+// ********************************************************************************************************
+// Delet User Account
+router.delete("/deleteProfile", auth, deleteAccount)
+router.put("/updateProfile", auth, updateProfile)
+router.get("/getUserDetails", auth, getAllUserDetails)
+// Get Enrolled Courses
+router.get("/getEnrolledCourses", auth, getEnrolledCourses)
 router.put("/updateDisplayPicture", auth, updateDisplayPicture)
+router.get("/instructorDashboard", auth, isInstructor, instructorDashboard)
 
-
-module.exports = router;
+module.exports = router

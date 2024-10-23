@@ -185,10 +185,10 @@ export default function EditProfile() {
                 name="about"
                 id="about"
                 placeholder="Enter Bio Details"
-                style={{
-                  boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
-                }}
-                className="w-full rounded-[0.5rem] bg-richblack-800 p-[12px] text-richblack-5"
+                  style={{
+                    boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
+                  }}
+                  className="w-full rounded-[0.5rem] bg-richblack-800 p-[12px] text-richblack-5"
                 {...register("about", { required: true })}
                 defaultValue={user?.additionalDetails?.about}
               />
