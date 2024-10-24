@@ -1,7 +1,7 @@
 import { toast } from "react-hot-toast"
 
 import { setLoading, setUser } from "../../slices/profileSlice"
-import { apiConnector } from "../apiconnector"
+import { apiConnector } from "../apiConnector"
 import { profileEndpoints } from "../apis"
 import { logout } from "./authAPI"
 
@@ -50,7 +50,6 @@ export async function getUserEnrolledCourses(token) {
         Authorization: `Bearer ${token}`,
       }
     )
-
     // console.log(
     //   "GET_USER_ENROLLED_COURSES_API API RESPONSE............",
     //   response

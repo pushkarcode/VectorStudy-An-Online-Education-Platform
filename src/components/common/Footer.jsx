@@ -30,8 +30,7 @@ const Footer = () => {
           {/* Section 1 */}
           <div className="lg:w-[50%] flex flex-wrap flex-row justify-between lg:border-r lg:border-richblack-700 pl-3 lg:pr-5 gap-3">
             <div className="w-[30%] flex flex-col gap-3 lg:w-[30%] mb-7 lg:pl-0">
-              {/* <img src={Logo} alt="" className="object-contain" /> */}
-              <p className="lg:text-[1.3vw] text-[4.7vw] font-bold"><span className="lg:text-[2vw] text-[7vw]">𐎏</span>VectorStudy</p>
+              <img src={Logo} alt="" className="object-contain" />
               <h1 className="text-richblack-50 font-semibold text-[16px]">
                 Company
               </h1>

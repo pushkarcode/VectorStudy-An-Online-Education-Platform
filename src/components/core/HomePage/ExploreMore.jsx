@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import { HomePageExplore } from "../../../data/homepage-explore";
-import HighlightText from "./HighlightText";
 import CourseCard from "./CourseCard";
+import HighlightText from "./HighlightText";
 
 const tabsName = [
   "Free",
   "New to coding",
   "Most popular",
-  "Skill paths",
+  "Skills paths",
   "Career paths",
 ];
+
 const ExploreMore = () => {
   const [currentTab, setCurrentTab] = useState(tabsName[0]);
   const [courses, setCourses] = useState(HomePageExplore[0].courses);
@@ -25,38 +26,40 @@ const ExploreMore = () => {
   };
 
   return (
-    <div className="relative">
-      <div className="lg:text-4xl text-[7.4vw] ml-[35vw] lg:ml-0 font-semibold  lg:text-center">
-        Unlock the
-        <HighlightText text={" Power of Code"} />
+    <div>
+      {/* Explore more section */}
+      <div>
+        <div className="text-4xl font-semibold text-center my-10">
+          Unlock the
+          <HighlightText text={"Power of Code"} />
+          <p className="text-center text-richblack-300 text-lg font-semibold mt-1">
+            Learn to Build Anything You Can Imagine
+          </p>
+        </div>
       </div>
 
-      <p className="lg:text-center ml-[35vw] lg:ml-0 text-richblack-300 text-lg font-semibold mt-2 ">
-        Learn to build anything you can imagine
-      </p>
-
-      <div className="flex flex-row opacity-0 lg:opacity-100 rounded-full bg-richblack-800 mt-5 lg:mb-6 mb-[80vh] border-b border-richblack-500  ">
-        {tabsName.map((elem, id) => {
+      {/* Tabs Section */}
+      <div className="hidden lg:flex gap-5 -mt-5 mx-auto w-max bg-richblack-800 text-richblack-200 p-1 rounded-full font-medium drop-shadow-[0_1.5px_rgba(255,255,255,0.25)]">
+        {tabsName.map((ele, index) => {
           return (
             <div
-              key={id}
-              className={`text-[16px] flex flex-row items-center gap-2 ${
-                currentTab === elem
+              className={` text-[16px] flex flex-row items-center gap-2 ${
+                currentTab === ele
                   ? "bg-richblack-900 text-richblack-5 font-medium"
                   : "text-richblack-200"
-              } rounded-full transition-all duration-200 cursor-pointer hover:bg-richblack-900 hover:text-richblack-5 px-10 py-[.6vw] m-1 `}
-              onClick={() => setMyCards(elem)}
+              } px-7 py-[7px] rounded-full transition-all duration-200 cursor-pointer hover:bg-richblack-900 hover:text-richblack-5`}
+              key={index}
+              onClick={() => setMyCards(ele)}
             >
-              {elem}
+              {ele}
             </div>
           );
         })}
       </div>
-
       <div className="hidden lg:block lg:h-[200px]"></div>
 
-      {/* course card ka group  */}
-      <div className="lg:absolute gap-10 justify-center lg:gap-5 flex lg:justify-between flex-wrap lg:bottom-[0] lg:left-[50%] lg:translate-x-[-50%] lg:translate-y-[50%] text-black lg:mb-0 mb-7 lg:px-0 px-3 w-[70vw] ">
+      {/* Cards Group */}
+      <div className="lg:absolute gap-10 justify-center lg:gap-0 flex lg:justify-between flex-wrap w-full lg:bottom-[0] lg:left-[50%] lg:translate-x-[-50%] lg:translate-y-[50%] text-black lg:mb-0 mb-7 lg:px-0 px-3">
         {courses.map((ele, index) => {
           return (
             <CourseCard

@@ -1,97 +1,119 @@
-import React, { useEffect, useState } from "react";
-import { Link, matchPath, useLocation } from "react-router-dom";
-import { NavbarLinks } from "../../data/navbar-links";
-import { useSelector } from "react-redux";
-import { IoCartOutline } from "react-icons/io5";
-import ProfileDropDown from "../core/Auth/ProfileDropDown";
-import { apiConnector } from "../../services/apiconnector";
-import { categories } from "../../services/apis";
-import { IoIosArrowDown } from "react-icons/io";
+import { useEffect, useState } from "react"
+import { AiOutlineMenu, AiOutlineShoppingCart } from "react-icons/ai"
+import { BsChevronDown } from "react-icons/bs"
+import { useSelector } from "react-redux"
+import { Link, matchPath, useLocation } from "react-router-dom"
+
+import logo from "../../assets/Logo/Logo-Full-Light.png"
+import { NavbarLinks } from "../../data/navbar-links"
+import { apiConnector } from "../../services/apiConnector"
+import { categories } from "../../services/apis"
+import { ACCOUNT_TYPE } from "../../utils/constants"
+import ProfileDropdown from "../core/Auth/ProfileDropdown"
 
 // const subLinks = [
 //   {
-//     title: "python",
-//     link: "catalog/python",
+//     title: "Python",
+//     link: "/catalog/python",
 //   },
 //   {
-//     title: "web dev",
-//     link: "catalog/web-development",
+//     title: "javascript",
+//     link: "/catalog/javascript",
 //   },
 //   {
-//     title: "backend dev",
-//     link: "catalog/backend-development",
+//     title: "web-development",
+//     link: "/catalog/web-development",
 //   },
 //   {
-//     title: "front dev",
-//     link: "catalog/frontend-development",
-//   },
-//   {
-//     title: "front dev",
-//     link: "catalog/frontend-development",
+//     title: "Android Development",
+//     link: "/catalog/Android Development",
 //   },
 // ];
 
-const Navbar = () => {
-  const { token } = useSelector((state) => state.auth);
-  const { user } = useSelector((state) => state.profile);
-  const { totalItems } = useSelector((state) => state.cart);
-  const location = useLocation();
+function Navbar() {
+  const { token } = useSelector((state) => state.auth)
+  const { user } = useSelector((state) => state.profile)
+  const { totalItems } = useSelector((state) => state.cart)
+  const location = useLocation()
 
-  const [subLinks, setSubLinks] = useState([]);
-
-  const fetchSubliks = async () => {
-    try {
-      const result = await apiConnector("GET", categories.CATEGORIES_API);
-      console.log("priting SUblinks result:", result);
-      setSubLinks(result.data.data);
-    } catch (error) {
-      console.log("Cloud not fetch the categroy list", error);
-    }
-  };
+  const [subLinks, setSubLinks] = useState([])
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    fetchSubliks();
-  }, []);
+    ;(async () => {
+      setLoading(true)
+      try {
+        const res = await apiConnector("GET", categories.CATEGORIES_API)
+        setSubLinks(res.data.data)
+      } catch (error) {
+        console.log("Could not fetch Categories.", error)
+      }
+      setLoading(false)
+    })()
+  }, [])
+
+  // console.log("sub links", subLinks)
 
   const matchRoute = (route) => {
-    return matchPath({ path: route }, location.pathname);
-  };
+    return matchPath({ path: route }, location.pathname)
+  }
+
   return (
-    <div className="flex h-14 items-center justify-center border-b-[1px] border-b-richblack-600">
-      <div className="flex w-11/12 max-w-maxContent items-center justify-between text-richblack-25">
+    <div
+      className={`flex h-14 items-center justify-center border-b-[1px] border-b-richblack-700 ${
+        location.pathname !== "/" ? "bg-richblack-800" : ""
+      } transition-all duration-200`}
+    >
+      <div className="flex w-11/12 max-w-maxContent items-center justify-between">
+        {/* Logo */}
         <Link to="/">
-          <p className="font-bold text-[1.5vw] font-['Gilroy'] tracking-wide">
-            <span className="text-[2vw] mr-1">𐎏</span>VectorStudy
-          </p>
+          <img src={logo} alt="Logo" width={160} height={32} loading="lazy" />
         </Link>
-
-        {/* Nav links */}
-        <nav>
-          <ul className="flex gap-x-6  text-richblack-25">
-            {NavbarLinks.map((link, id) => (
-              <li key={id}>
+        {/* Navigation links */}
+        <nav className="hidden md:block">
+          <ul className="flex gap-x-6 text-richblack-25">
+            {NavbarLinks.map((link, index) => (
+              <li key={index}>
                 {link.title === "Catalog" ? (
-                  // ! (this thing taking soo much time)
-                  <div className="flex items-center gap-x-1 group relative">
-                    <p className="font-[Gilroy] text-[1.1vw] tracking-wide">{link.title}</p>
-                    <IoIosArrowDown />
-
+                  <>
                     <div
-                      className="invisible absolute left-[50%]  top-[163%] translate-x-[-50%]
-                    flex flex-col rounded-md bg-richblack-5 p-4 text-richblue-900  opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100 w-[18vw] py-4 z-[999]"
+                      className={`group relative flex cursor-pointer items-center gap-1 ${
+                        matchRoute("/catalog/:catalogName")
+                          ? "text-yellow-25"
+                          : "text-richblack-25"
+                      }`}
                     >
-                      <div className="absolute left-[50%] -top-1 h-10 w-10 rotate-45 rounded-sm bg-richblack-5 translate-x-[37%] z-[-999] "></div>
-                      {subLinks?.length ? (
-                        subLinks.map((sublink, id) => (
-                          <Link to={`${sublink.link}`} key={id}>
-                            <p className="p-2 text-[1.2vw] font-normal text-richblack-700 tracking-wider transition-all duration-200 hover:bg-richblack-300  rounded-sm">{sublink.title}</p>
-                          </Link>
-                        ))
-                      ) : (
-                        <div></div>
-                      )}
+                      <p>{link.title}</p>
+                      <BsChevronDown />
+                      <div className="invisible absolute left-[50%] top-[50%] z-[1000] flex w-[200px] translate-x-[-50%] translate-y-[3em] flex-col rounded-lg bg-richblack-5 p-4 text-richblack-900 opacity-0 transition-all duration-150 group-hover:visible group-hover:translate-y-[1.65em] group-hover:opacity-100 lg:w-[300px]">
+                        <div className="absolute left-[50%] top-0 -z-10 h-6 w-6 translate-x-[80%] translate-y-[-40%] rotate-45 select-none rounded bg-richblack-5"></div>
+                        {loading ? (
+                          <p className="text-center">Loading...</p>
+                        ) : subLinks.length ? (
+                          <>
+                            {subLinks
+                              ?.filter(
+                                (subLink) => subLink?.courses?.length > 0
+                              )
+                              ?.map((subLink, i) => (
+                                <Link
+                                  to={`/catalog/${subLink.name
+                                    .split(" ")
+                                    .join("-")
+                                    .toLowerCase()}`}
+                                  className="rounded-lg bg-transparent py-4 pl-4 hover:bg-richblack-50"
+                                  key={i}
+                                >
+                                  <p>{subLink.name}</p>
+                                </Link>
+                              ))}
+                          </>
+                        ) : (
+                          <p className="text-center">No Courses Found</p>
+                        )}
+                      </div>
                     </div>
-                  </div>
+                  </>
                 ) : (
                   <Link to={link?.path}>
                     <p
@@ -109,38 +131,40 @@ const Navbar = () => {
             ))}
           </ul>
         </nav>
-
-
-
-        {/*  Golu-->Login/SignUp/Dashboard  */}
-        <div className="flex gap-x-4 items-center">
-          {user && user?.accountType !== "Instructor" && (
-            <Link to={"/dashboard/cart"} className="relative">
-              <IoCartOutline size={12} />
+        {/* Login / Signup / Dashboard */}
+        <div className="hidden items-center gap-x-4 md:flex">
+          {user && user?.accountType !== ACCOUNT_TYPE.INSTRUCTOR && (
+            <Link to="/dashboard/cart" className="relative">
+              <AiOutlineShoppingCart className="text-2xl text-richblack-100" />
               {totalItems > 0 && (
-                <span className="bg-yellow-50">{totalItems}</span>
+                <span className="absolute -bottom-2 -right-2 grid h-5 w-5 place-items-center overflow-hidden rounded-full bg-richblack-600 text-center text-xs font-bold text-yellow-100">
+                  {totalItems}
+                </span>
               )}
             </Link>
           )}
           {token === null && (
             <Link to="/login">
-              <button className="border border-richblack-700 bg-richblack-800 px-[12px] py-[.5vw] text-richblack-100 rounded-md">
-                Log In
+              <button className="rounded-[8px] border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100">
+                Log in
               </button>
             </Link>
           )}
           {token === null && (
             <Link to="/signup">
-              <button className="border border-richblack-700 bg-richblack-800 px-[12px] py-[.5vw] text-richblack-100 rounded-md">
-                Sign Up
+              <button className="rounded-[8px] border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100">
+                Sign up
               </button>
             </Link>
           )}
-          {token !== null && <ProfileDropDown />}
+          {token !== null && <ProfileDropdown />}
         </div>
+        <button className="mr-4 md:hidden">
+          <AiOutlineMenu fontSize={24} fill="#AFB2BF" />
+        </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar

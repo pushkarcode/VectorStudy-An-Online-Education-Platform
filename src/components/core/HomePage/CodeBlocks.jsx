@@ -1,5 +1,5 @@
 import React from "react";
-import CTAButton from "../HomePage/Button";
+import CTAButton from "./Button";
 import { TypeAnimation } from "react-type-animation";
 import { FaArrowRight } from "react-icons/fa";
 
@@ -60,7 +60,7 @@ const CodeBlocks = ({
 
         {/* Codes */}
         <div
-          className={`w-[90%] flex flex-col gap-2 font-bold text-[1.2vw] font-mono ${codeColor} pr-1`}
+          className={`w-[90%] flex flex-col gap-2 font-bold font-mono ${codeColor} pr-1`}
         >
           <TypeAnimation
             sequence={[codeblock, 1000, ""]}
