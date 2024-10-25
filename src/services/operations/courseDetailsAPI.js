@@ -322,7 +322,7 @@ export const getFullDetailsOfCourse = async (courseId, token) => {
     )
     console.log("COURSE_FULL_DETAILS_API API RESPONSE............", response)
 
-    if (!response.data.success) {
+    if (!response?.data?.success) {
       throw new Error(response.data.message)
     }
     result = response?.data?.data

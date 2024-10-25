@@ -133,7 +133,7 @@ const enrollStudents = async (courses, userId) => {
     try {
       const enrolledCourse = await Course.findByIdAndUpdate(
         courseId,
-        { $addToSet: { studentsEnroled: userId } }, // Use $addToSet to avoid duplicates
+        { $addToSet: { studentsEnrolled: userId } }, // Use $addToSet to avoid duplicates
         { new: true }
       );
 
