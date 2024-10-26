@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react"
 import { FiUpload } from "react-icons/fi"
 import { useDispatch, useSelector } from "react-redux"
 
-import { updateDisplayPicture } from "../../../../services/operations/SettingsAPI"
+import { updateDisplayPicture } from "../../../../services/operations/settingsAPI"
 import IconBtn from "../../../common/IconBtn"
 
 export default function ChangeProfilePicture() {
