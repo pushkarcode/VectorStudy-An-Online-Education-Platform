@@ -2,7 +2,8 @@
 
 
   ![alt text](image.png)
-#StudyNotion
+
+@StudyNotion
 StudyNotion is a full-stack educational platform designed to streamline learning by providing structured courses, easy enrollment, and a reliable review system.
 
 Table of Contents
@@ -25,14 +26,14 @@ Backend: Node.js, Express
 Database: MongoDB (using MongoDB Atlas)
 API: RESTful APIs with Express
 
-#Setup
+$Setup
 Prerequisites
 Node.js & npm installed
 MongoDB Atlas account for cloud database
 Installation
 Clone the repository:
 
-bash
+%bash
 Copy code
 git clone https://github.com/your-username/studynotion.git
 cd studynotion
