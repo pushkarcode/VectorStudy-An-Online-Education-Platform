@@ -16,26 +16,29 @@ const dotenv = require("dotenv");
 dotenv.config();
 const PORT = process.env.PORT || 4000;
 
-//database connect
-database.connect();
+
 //middlewares
 app.use(express.json());
 app.use(cookieParser());
+//!------------cors are very important dhyan se use karo 
 app.use(
 	cors({
-		origin:"http://localhost:3000",
+		origin:"*",
 		credentials:true,
 	})
 )
-
 app.use(
 	fileUpload({
 		useTempFiles:true,
 		tempFileDir:"/tmp",
 	})
 )
-//cloudinary connection
+// ------> database connect
+database.connect();
+
+// -----> cloudinary connect
 cloudinaryConnect();
+
 
 //routes
 app.use("/api/v1/auth", userRoutes);
@@ -44,16 +47,17 @@ app.use("/api/v1/course", courseRoutes);
 app.use("/api/v1/payment", paymentRoutes);
 app.use("/api/v1/reach", contactUsRoute);
 
-//def route
 
-app.get("/", (req, res) => {
-	return res.json({
-		success:true,
-		message:'Your server is up and running....'
-	});
-});
 
-app.listen(PORT, () => {
-	console.log(`App is running at ${PORT}`)
+// default routes
+app.get("/",(req, res) => {
+    return res.json({
+        success: true,
+        message: "Your server is up and running..."
+    })
 })
 
+// activate the server
+app.listen(PORT, () => {
+    console.log("App  is running on port " + PORT);
+})
