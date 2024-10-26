@@ -15,7 +15,7 @@ import { FaStar } from "react-icons/fa";
 import { Autoplay, FreeMode, Pagination } from "swiper/modules";
 
 // API Connector and Endpoints
-import { apiConnector } from "../../services/apiConnector";
+import { apiConnector } from "../../services/apiconnector";
 import { ratingsEndpoints } from "../../services/apis";
 
 function ReviewSlider() {
