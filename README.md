@@ -1,4 +1,4 @@
-# VectorStudy --> An Online Education Platfrom
+# StudyNotion --> An Online Education Platfrom
 
 
   ![alt text](image.png)
